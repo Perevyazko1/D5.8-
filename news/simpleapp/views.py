@@ -1,7 +1,7 @@
 # Импортируем класс, который говорит нам о том,
 
 from django.views.generic import ListView, DetailView
-from news.simpleapp.models import Product, News
+from .models import Product, News
 
 
 class ProductsList(ListView):

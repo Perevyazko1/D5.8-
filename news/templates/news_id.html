@@ -1,14 +1,11 @@
 {% extends 'flatpages/default.html' %}
 {% load custom_filters %}
 <!-- Название у нас будет Product -->
-{% block title %}
-News
-{% endblock title %}
 
 <!-- В контенте на странице мы выводим сам товар, идентификатор которого был передан в url -->
 {% block content %}
 <!--<h1>{{ news }}</h1>-->
-   <h1> Новостей: {{ news|length }}</h1>
+   <h1> {{ news.title|censor }} </h1>
 <!--   <h3>{{ time_now|date:'M d Y' }}</h3>-->
    <!-- Если в переменной next_sale будет None,
    то выведется указанный в фильтре текст -->
@@ -16,22 +13,13 @@ News
 
    <hr>
    {% if news %}
-       <table>
-           <tr>
-               <td>Заголовок</td>
-               <td>Дата публикации</td>
-               <td>Статья</td>
-           </tr>
 
-           {% for new in news %}
-           <tr>
-               <td>{{ new.title|censor }}</td>
-               <td>{{ new.dateCreation|date:'d M Y' }}</td>
-               <td>{{ new.text|censor|truncatechars:20 }}</td>
-           </tr>
-           {% endfor %}
+<!-- В контенте на странице мы выводим сам товар, идентификатор которого был передан в url -->
+        <h1>{{ news.text|censor }}</h1>
 
-       </table>
+        <h2>{{news.dateCreation|date:'d M Y'}}</h2>
+
+
    {% else %}
        <h2>Новостей нет, но вы держитесь!</h2>
    {% endif %}

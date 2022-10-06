@@ -43,6 +43,6 @@ class NewsDetail(DetailView):
     # Модель всё та же, но мы хотим получать информацию по отдельному товару
     model = News
     # Используем другой шаблон — product.html
-    template_name = 'news.html'
+    template_name = 'news_id.html'
     # Название объекта, в котором будет выбранный пользователем продукт
     context_object_name = 'news'

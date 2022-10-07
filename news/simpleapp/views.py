@@ -52,4 +52,4 @@ class NewsSearch(ListView):
     model = News
     ordering = 'title'
     template_name = 'search.html'
-    context_object_name = 'search'
+    context_object_name = 'news'

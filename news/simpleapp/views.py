@@ -37,7 +37,7 @@ class NewsList(ListView):
     # Это имя списка, в котором будут лежать все объекты.
     # Его надо указать, чтобы обратиться к списку объектов в html-шаблоне.
     context_object_name = 'news'
-    paginate_by = 1 # регулируем количество записей на странице
+    paginate_by = 2 # регулируем количество записей на странице
 
 class NewsDetail(DetailView):
     # Модель всё та же, но мы хотим получать информацию по отдельному товару
@@ -46,3 +46,10 @@ class NewsDetail(DetailView):
     template_name = 'news_id.html'
     # Название объекта, в котором будет выбранный пользователем продукт
     context_object_name = 'news'
+
+
+class NewsSearch(ListView):
+    model = News
+    ordering = 'title'
+    template_name = 'search.html'
+    context_object_name = 'search'

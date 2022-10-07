@@ -53,3 +53,4 @@ class NewsSearch(ListView):
     ordering = 'title'
     template_name = 'search.html'
     context_object_name = 'news'
+    paginate_by = 10

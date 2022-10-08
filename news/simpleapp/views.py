@@ -75,5 +75,5 @@ class NewsSearch(ListView):
         context = super().get_context_data(**kwargs)
         # Добавляем в контекст объект фильтрации.
         context['filterset'] = self.filterset
-        print(context)
+
         return context

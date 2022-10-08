@@ -16,8 +16,5 @@ class NewsFilter(FilterSet):
            'title': ['icontains'],
            # количество товаров должно быть больше или равно
            'category': ['exact'],
-           'dateCreation': [
-               'lt',  # дата должна быть меньше или равна указанной
-               'gt',  # дата должна быть больше или равна указанной
-           ],
+           'dateCreation': ['gt'],
        }

@@ -1,6 +1,8 @@
 # Импортируем класс, который говорит нам о том,
 
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
+
+from .forms import NewsForm
 from .models import Product, News
 from  .filters import NewsFilter
 
@@ -77,3 +79,15 @@ class NewsSearch(ListView):
         context['filterset'] = self.filterset
 
         return context
+
+
+# Добавляем новое представление для создания товаров.
+class NewsCreate(CreateView):
+    # Указываем нашу разработанную форму
+    form_class = NewsForm
+    # модель товаров
+    model = News
+    # и новый шаблон, в котором используется форма.
+    template_name = 'edit_news.html'
+
+

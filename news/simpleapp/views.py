@@ -1,6 +1,6 @@
 # Импортируем класс, который говорит нам о том,
 
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 
 from .forms import NewsForm
 from .models import Product, News
@@ -39,7 +39,7 @@ class NewsList(ListView):
     # Это имя списка, в котором будут лежать все объекты.
     # Его надо указать, чтобы обратиться к списку объектов в html-шаблоне.
     context_object_name = 'news'
-    paginate_by = 2 # регулируем количество записей на странице
+    paginate_by = 5 # регулируем количество записей на странице
 
 
 
@@ -88,6 +88,13 @@ class NewsCreate(CreateView):
     # модель товаров
     model = News
     # и новый шаблон, в котором используется форма.
+    template_name = 'edit_news.html'
+
+
+# Добавляем представление для изменения товара.
+class NewsUpdate(UpdateView):
+    form_class = NewsForm
+    model = News
     template_name = 'edit_news.html'
 
 

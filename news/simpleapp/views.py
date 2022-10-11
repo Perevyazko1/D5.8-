@@ -1,6 +1,6 @@
 # Импортируем класс, который говорит нам о том,
-
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from .forms import NewsForm
 from .models import Product, News
@@ -98,3 +98,8 @@ class NewsUpdate(UpdateView):
     template_name = 'edit_news.html'
 
 
+# Представление удаляющее товар.
+class NewsDelete(DeleteView):
+    model = News
+    template_name = 'delete_news.html'
+    success_url = reverse_lazy('news_list')

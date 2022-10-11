@@ -12,7 +12,8 @@ class NewsForm(forms.ModelForm):
         fields = [
             'title',
             'text',
-            'category'
+            'category',
+            'categoryType'
 
         ]
 

@@ -5,7 +5,7 @@ from .models import News
 
 
 class NewsForm(forms.ModelForm):
-    # description = forms.CharField(min_length=20)
+    title = forms.CharField(max_length=30)
 
     class Meta:
         model = News
@@ -19,17 +19,17 @@ class NewsForm(forms.ModelForm):
 
     def clean(self):
         cleaned_data = super().clean()
-        name = cleaned_data.get("title")
-        # description = cleaned_data.get("text")
-        #
-        # if description is not None and len(description) < 20:
-        #     raise ValidationError({
-        #         "description": "Описание не может быть менее 20 символов."
-        #     })
-        #
-        # if name == description:
-        #     raise ValidationError(
-        #         "Описание не должно быть идентично названию."
-        #     )
+        title = cleaned_data.get("title")
+        text = cleaned_data.get("text")
+
+        if text is not None and len(text) < 10:
+            raise ValidationError({
+                "text": "Заголовок не может быть менее 10 символов."
+            })
+
+        if title == text:
+            raise ValidationError(
+                "Описание не должно быть идентично названию."
+            )
 
         return cleaned_data

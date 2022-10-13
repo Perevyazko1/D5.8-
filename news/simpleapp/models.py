@@ -14,15 +14,16 @@ class News(models.Model):
         (ARTICLE, 'Статья')
     )
     categoryType = models.CharField(max_length=2,choices=CATEGORY_CHOICES,
-                                    default=ARTICLE)
-    dateCreation = models.DateTimeField(auto_now_add=True)
+                                    default=ARTICLE,verbose_name='Тип')
+    dateCreation = models.DateTimeField(auto_now_add=True, verbose_name='Дата')
     category = models.ForeignKey(
         to='NewsCategory',
         on_delete=models.CASCADE,
-        related_name='news',  # все продукты в категории будут доступны через поле news
+        related_name='news',
+        verbose_name='Категория'# все продукты в категории будут доступны через поле news
     )
-    title = models.CharField(max_length=128)
-    text = models.TextField()
+    title = models.CharField(max_length=128, verbose_name='Заголовок')
+    text = models.TextField(verbose_name='Текст')
     def __str__(self):
         return f'{self.title.title()}: {self.text[:20]}'
 
@@ -31,7 +32,7 @@ class News(models.Model):
 
 
 class NewsCategory(models.Model):
-    name = models.CharField(max_length=100, unique=True,default=None)
+    name = models.CharField(max_length=100, unique=True, default=None)
 
     def __str__(self):
         return self.name.title()

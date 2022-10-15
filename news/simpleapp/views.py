@@ -1,4 +1,5 @@
 # Импортируем класс, который говорит нам о том,
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
@@ -62,7 +63,8 @@ class NewsSearch(ListView):
 
 
 # Добавляем новое представление для создания товаров.
-class NewsCreate(CreateView):
+class NewsCreate(LoginRequiredMixin, CreateView):
+    raise_exception = True
     # Указываем нашу разработанную форму
     form_class = NewsForm
     # модель товаров
@@ -73,6 +75,7 @@ class NewsCreate(CreateView):
 
 # Добавляем представление для изменения товара.
 class NewsUpdate(UpdateView):
+
     form_class = NewsForm
     model = News
     template_name = 'edit_news.html'

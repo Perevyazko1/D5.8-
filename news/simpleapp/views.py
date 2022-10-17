@@ -1,5 +1,5 @@
 # Импортируем класс, который говорит нам о том,
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
@@ -63,7 +63,8 @@ class NewsSearch(ListView):
 
 
 # Добавляем новое представление для создания товаров.
-class NewsCreate(LoginRequiredMixin, CreateView):
+class NewsCreate(PermissionRequiredMixin, CreateView):
+    permission_required = ('simpleapp.add_news',)
     raise_exception = True
     # Указываем нашу разработанную форму
     form_class = NewsForm
@@ -74,15 +75,16 @@ class NewsCreate(LoginRequiredMixin, CreateView):
 
 
 # Добавляем представление для изменения товара.
-class NewsUpdate(UpdateView):
-
+class NewsUpdate(PermissionRequiredMixin,UpdateView):
+    permission_required = ('simpleapp.change_news',)
     form_class = NewsForm
     model = News
     template_name = 'edit_news.html'
 
 
 # Представление удаляющее товар.
-class NewsDelete(DeleteView):
+class NewsDelete(PermissionRequiredMixin,DeleteView):
+    permission_required = ('simpleapp.delete_news',)
     model = News
     template_name = 'delete_news.html'
     success_url = reverse_lazy('news_list')
